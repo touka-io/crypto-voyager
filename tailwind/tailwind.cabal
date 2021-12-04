@@ -1,0 +1,78 @@
+cabal-version:      2.4
+name:               tailwind
+version:            0.1.0.0
+synopsis:           Price history fetcher for cryptocurrencies
+author:             Touka Ri
+maintainer:         ritouka90@gmail.com
+
+common common
+  ghc-options:
+    -Wall
+    -Wcompat
+    -Wredundant-constraints
+    -Wmissing-export-lists
+    -- Remove the following as of GHC 9.2.1
+    -- See https://github.com/ghc-proposals/ghc-proposals/pull/71
+    -Wincomplete-record-updates
+    -Wincomplete-uni-patterns
+  default-language: Haskell2010
+  default-extensions:
+    NoImplicitPrelude
+    -- GHC2021
+    BangPatterns
+    BinaryLiterals
+    ConstrainedClassMethods
+    ConstraintKinds
+    DeriveDataTypeable
+    DeriveFoldable
+    DeriveFunctor
+    DeriveGeneric
+    DeriveLift
+    DeriveTraversable
+    DoAndIfThenElse
+    EmptyCase
+    EmptyDataDecls
+    EmptyDataDeriving
+    ExistentialQuantification
+    ExplicitForAll
+    -- FieldSelectors
+    FlexibleContexts
+    FlexibleInstances
+    ForeignFunctionInterface
+    GADTSyntax
+    GeneralisedNewtypeDeriving
+    HexFloatLiterals
+    -- ImplicitPrelude
+    ImportQualifiedPost
+    InstanceSigs
+    KindSignatures
+    MonomorphismRestriction
+    MultiParamTypeClasses
+    NamedFieldPuns
+    NamedWildCards
+    NumericUnderscores
+    PatternGuards
+    PolyKinds
+    PostfixOperators
+    RankNTypes
+    RelaxedPolyRec
+    ScopedTypeVariables
+    StandaloneDeriving
+    StandaloneKindSignatures
+    StarIsType
+    TraditionalRecordSyntax
+    TupleSections
+    TypeApplications
+    TypeOperators
+    TypeSynonymInstances
+
+executable tailwind
+  import: common
+  hs-source-dirs:   app
+  default-language: Haskell2010
+  main-is:          Main.hs
+  ghc-options:
+    -threaded -rtsopts
+  build-depends:
+      base
+    , protolude
