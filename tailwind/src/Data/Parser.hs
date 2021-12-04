@@ -7,14 +7,13 @@ import Data.Aeson.Optics
 import Data.Fixed
 import Data.Time
 import Data.Time.Clock.POSIX
-import Data.Vector
 import Optics
 import Protolude hiding ((%))
 
 type Ticker = (UTCTime, Double)
 
-parseChart :: Text -> Maybe (Vector Ticker)
-parseChart x = x ^? key "stats" % _Array >>= traverse parseTicker
+parseChart :: Text -> Maybe [Ticker]
+parseChart x = x ^? key "stats" % _Array >>= traverse parseTicker . toList
 
 parseTicker :: Value -> Maybe Ticker
 parseTicker v = do
