@@ -71,11 +71,14 @@ library
   hs-source-dirs:   src
   exposed-modules:
       Data.Parser
+    , Tailwind.DB.Queries
+    , Tailwind.Types
   build-depends:
       aeson
     , aeson-optics
     , base
     , optics
+    , postgresql-simple
     , protolude
     , time
 
@@ -86,8 +89,11 @@ executable tailwind
   ghc-options:
     -threaded -rtsopts
   build-depends:
-      base
+      tailwind
+    , base
+    , postgresql-simple
     , protolude
+    , time
 
 test-suite test
   import: common

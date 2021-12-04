@@ -5,12 +5,10 @@ module Data.Parser (parseChart, Ticker) where
 import Data.Aeson
 import Data.Aeson.Optics
 import Data.Fixed
-import Data.Time
 import Data.Time.Clock.POSIX
 import Optics
 import Protolude hiding ((%))
-
-type Ticker = (UTCTime, Double)
+import Tailwind.Types
 
 parseChart :: Text -> Maybe [Ticker]
 parseChart x = x ^? key "stats" % _Array >>= traverse parseTicker . toList
