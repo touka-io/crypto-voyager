@@ -13,6 +13,8 @@ db = "postgres://postgres:password@localhost:5432/voyager?sslmode=disable"
 main :: IO ()
 main = do
   conn <- connectPostgreSQL db
+  t <- readSyncCursor conn "solana"
+  putText $ "sync_cursor t=" <> show t
   ts <- fetchTickers "solana"
   putText $ "fetch_data count=" <> show (length ts)
   count <- insertTickers conn "solana" ts

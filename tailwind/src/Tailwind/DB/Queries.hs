@@ -1,7 +1,8 @@
 {-# LANGUAGE QuasiQuotes #-}
 
-module Tailwind.DB.Queries (insertTickers) where
+module Tailwind.DB.Queries (insertTickers, readSyncCursor) where
 
+import Data.Time.Clock
 import Database.PostgreSQL.Simple
 import Database.PostgreSQL.Simple.SqlQQ
 import Protolude
@@ -19,3 +20,13 @@ insertTickers conn id tickers =
   executeMany conn insertCoinPrices values
   where
     values = (\(t, p) -> (t, id, p)) <$> tickers
+
+readSyncCursor :: Connection -> Text -> IO (Maybe UTCTime)
+readSyncCursor conn id = do
+  r :: [Only UTCTime] <- query conn q (Only id)
+  pure $ fromOnly <$> head r
+  where
+    q = [sql| select cursor
+              from coin_sync
+              where id = ?
+        |]
