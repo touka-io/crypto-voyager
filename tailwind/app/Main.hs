@@ -2,6 +2,7 @@
 
 module Main (main) where
 
+import qualified Data.Text as T
 import Data.Time.Clock
 import Database.PostgreSQL.Simple
 import Protolude
@@ -16,8 +17,9 @@ interval = nominalDay
 
 main :: IO ()
 main = do
+  [id'] <- getArgs
+  let id = T.pack id'
   conn <- connectPostgreSQL db
-  let id = "solana"
   -- TODO: Exit when end > now
   forever $ do
     t <- readSyncCursor conn id

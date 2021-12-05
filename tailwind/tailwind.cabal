@@ -98,6 +98,7 @@ executable tailwind
     , base
     , postgresql-simple
     , protolude
+    , text
     , time
 
 test-suite test
