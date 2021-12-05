@@ -2,10 +2,11 @@
 
 module Tailwind.DataSource.CoinGecko (fetchTickers) where
 
-import Data.Parser
-import Protolude
 import qualified Network.Wreq as W
 import Optics
+import Protolude
+import Tailwind.Parser.CoinGecko (parseChart)
+import Tailwind.Types (Ticker)
 
 fetchTickers :: IO [Ticker]
 fetchTickers = do

@@ -70,9 +70,9 @@ library
   import: common
   hs-source-dirs:   src
   exposed-modules:
-      Data.Parser
-    , Tailwind.DataSource.CoinGecko
+      Tailwind.DataSource.CoinGecko
     , Tailwind.DB.Queries
+    , Tailwind.Parser.CoinGecko
     , Tailwind.Types
   build-depends:
       aeson

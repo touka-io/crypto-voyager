@@ -1,11 +1,10 @@
 module Main (main) where
 
-import Protolude
-
 import Data.Aeson
 import qualified Data.ByteString.Lazy as LBS
 import Data.Time.Clock.POSIX
-import Data.Parser
+import Protolude
+import Tailwind.Parser.CoinGecko
 import Test.Tasty
 import Test.Tasty.Hspec
 import Test.Hspec

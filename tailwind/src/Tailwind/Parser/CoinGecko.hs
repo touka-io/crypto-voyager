@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Data.Parser (parseChart, Ticker) where
+module Tailwind.Parser.CoinGecko (parseChart, Ticker) where
 
 import Data.Aeson
 import Data.Aeson.Optics
