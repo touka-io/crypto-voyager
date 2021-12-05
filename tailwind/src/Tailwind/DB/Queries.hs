@@ -1,6 +1,10 @@
 {-# LANGUAGE QuasiQuotes #-}
 
-module Tailwind.DB.Queries (insertTickers, readSyncCursor) where
+module Tailwind.DB.Queries (
+  insertTickers, 
+  readSyncCursor,
+  updateSyncCursor,
+) where
 
 import Data.Time.Clock
 import Database.PostgreSQL.Simple
@@ -28,5 +32,14 @@ readSyncCursor conn id = do
   where
     q = [sql| select cursor
               from coin_sync
+              where id = ?
+        |]
+
+updateSyncCursor :: Connection -> Text -> UTCTime -> IO Int64
+updateSyncCursor conn id cursor =
+  execute conn q (cursor, id)
+  where
+    q = [sql| update coin_sync
+              set cursor = ?
               where id = ?
         |]
