@@ -10,7 +10,7 @@ import Optics
 import Protolude hiding ((%))
 import Tailwind.Types
 
-parseChart :: Text -> Maybe [Ticker]
+parseChart :: Value -> Maybe [Ticker]
 parseChart x = x ^? key "stats" % _Array >>= traverse parseTicker . toList
 
 parseTicker :: Value -> Maybe Ticker

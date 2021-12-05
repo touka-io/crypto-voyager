@@ -71,6 +71,7 @@ library
   hs-source-dirs:   src
   exposed-modules:
       Data.Parser
+    , Tailwind.DataSource.CoinGecko
     , Tailwind.DB.Queries
     , Tailwind.Types
   build-depends:
@@ -81,6 +82,7 @@ library
     , postgresql-simple
     , protolude
     , time
+    , wreq
 
 executable tailwind
   import: common
@@ -102,6 +104,7 @@ test-suite test
   main-is:          Main.hs
   build-depends:
       tailwind
+    , aeson
     , base
     , bytestring
     , hspec
