@@ -11,6 +11,7 @@ insertCoinPrices :: Query
 insertCoinPrices =
   [sql| insert into coin_price
         values (?, ?, ?)
+        on conflict do nothing
   |]
 
 insertTickers :: Connection -> Text -> [Ticker] -> IO Int64

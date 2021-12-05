@@ -74,6 +74,8 @@ library
     , Tailwind.DB.Queries
     , Tailwind.Parser.CoinGecko
     , Tailwind.Types
+  other-modules:
+      Network.Wreq.Optics
   build-depends:
       aeson
     , aeson-optics
@@ -81,6 +83,7 @@ library
     , optics
     , postgresql-simple
     , protolude
+    , text
     , time
     , wreq
 
