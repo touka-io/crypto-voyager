@@ -13,20 +13,23 @@ db :: ByteString
 db = "postgres://postgres:password@localhost:5432/voyager?sslmode=disable"
 
 interval :: NominalDiffTime
-interval = nominalDay
+interval = nominalDay * 28
 
 main :: IO ()
 main = do
   [id'] <- getArgs
   let id = T.pack id'
   conn <- connectPostgreSQL db
-  -- TODO: Exit when end > now
   forever $ do
     t <- readSyncCursor conn id
     putText $ "sync_cursor t=" <> show t
     -- TODO: Create sync cursor when not exists
     let start = fromMaybe undefined t
-    let end = addUTCTime interval start
+    let end' = addUTCTime interval start
+    now <- getCurrentTime
+    let today = UTCTime (utctDay now) 0
+    -- TODO: Exit when end' == today
+    let end = if end' > today then today else end'
     putText $ "next_range start=" <> show start <> " end=" <> show end
     ts <- fetchTickers id (start, end)
     putText $ "fetch_data count=" <> show (length ts)
